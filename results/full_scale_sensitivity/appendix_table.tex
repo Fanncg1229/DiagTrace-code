@@ -1,0 +1,19 @@
+\begin{table*}[t]
+\centering
+\small
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrrrrrrrrrrrrrrrr}
+\toprule
+Model & $N_m$ & $N_f$ & \multicolumn{3}{c}{Tversky} & \multicolumn{3}{c}{LCS recall} & \multicolumn{3}{c}{Pairwise order accuracy} & \multicolumn{3}{c}{Weighted F1} & \multicolumn{3}{c}{Event-level recall} \\
+ & & & Matched & Full & $\Delta$ & Matched & Full & $\Delta$ & Matched & Full & $\Delta$ & Matched & Full & $\Delta$ & Matched & Full & $\Delta$ \\
+\midrule
+GPT-4.1 mini & 225 & 502 & 0.360 & 0.393 & +0.033 & 0.465 & 0.502 & +0.037 & 0.646 & 0.669 & +0.023 & 0.592 & 0.618 & +0.026 & 0.577 & 0.575 & -0.002 \\
+Claude Haiku 4.5 & 225 & 498 & 0.334 & 0.362 & +0.027 & 0.510 & 0.537 & +0.026 & 0.690 & 0.679 & -0.011 & 0.589 & 0.610 & +0.021 & 0.665 & 0.666 & +0.001 \\
+Gemini 2.5 Flash & 225 & 502 & 0.359 & 0.380 & +0.022 & 0.500 & 0.535 & +0.035 & 0.654 & 0.670 & +0.017 & 0.603 & 0.622 & +0.018 & 0.655 & 0.654 & -0.001 \\
+Kimi K2.5 & 225 & 225 & 0.399 & 0.399 & +0.000 & 0.561 & 0.561 & +0.000 & 0.601 & 0.601 & +0.000 & 0.638 & 0.638 & +0.000 & 0.661 & 0.661 & +0.000 \\
+\bottomrule
+\end{tabular}
+}
+\caption{Matched-225 versus full-scale sensitivity. $\Delta$ is full minus matched. Full-scale columns are not paired across models.}
+\label{tab:full-scale-sensitivity}
+\end{table*}

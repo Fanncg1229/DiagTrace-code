@@ -1,0 +1,71 @@
+{
+  "schema_version": "synthetic-demo-v1",
+  "case_id": "SYNTHETIC001",
+  "initial_observation": {
+    "demographics": "A synthetic adult patient",
+    "encounter_context": "Presented to a fictional outpatient clinic",
+    "chief_complaint": "Fatigue",
+    "first_contact_summary": "A synthetic patient presented with fatigue.",
+    "presenting_symptoms": ["fatigue"],
+    "known_prior_history": []
+  },
+  "evidence_items": [
+    {
+      "id": "E001",
+      "category": "physical_exam",
+      "source_text": "Synthetic examination showed pallor.",
+      "source_section": "Synthetic presentation",
+      "temporal_cue": "at presentation",
+      "timeline_order": 0,
+      "phase_index": 0,
+      "phase_label": "initial_presentation",
+      "repeat_key": "exam",
+      "image_finding": false,
+      "diagnosis_revealing": false
+    },
+    {
+      "id": "E002",
+      "category": "routine_lab",
+      "source_text": "Synthetic laboratory testing showed anemia.",
+      "source_section": "Synthetic investigations",
+      "temporal_cue": "day 1",
+      "timeline_order": 1,
+      "phase_index": 1,
+      "phase_label": "early_workup",
+      "repeat_key": "cbc",
+      "image_finding": false,
+      "diagnosis_revealing": false
+    },
+    {
+      "id": "E003",
+      "category": "imaging_report",
+      "source_text": "Synthetic imaging showed a focal lesion.",
+      "source_section": "Synthetic investigations",
+      "temporal_cue": "day 2",
+      "timeline_order": 2,
+      "phase_index": 2,
+      "phase_label": "targeted_workup",
+      "repeat_key": "imaging",
+      "image_finding": true,
+      "diagnosis_revealing": false
+    },
+    {
+      "id": "E004",
+      "category": "pathology_report",
+      "source_text": "Synthetic biopsy showed the predefined diagnostic pattern.",
+      "source_section": "Synthetic pathology",
+      "temporal_cue": "day 3",
+      "timeline_order": 3,
+      "phase_index": 5,
+      "phase_label": "confirmatory_testing",
+      "repeat_key": "biopsy",
+      "image_finding": false,
+      "diagnosis_revealing": true
+    }
+  ],
+  "hidden_reference": {
+    "final_diagnosis_verbatim": "Synthetic diagnosis",
+    "accepted_aliases": [],
+    "diagnostic_reasoning_verbatim_spans": []
+  }
+}

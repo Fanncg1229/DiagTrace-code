@@ -1,0 +1,17 @@
+section,metric,source,GPT-4.1 mini,Claude Haiku 4.5,Gemini 2.5 Flash,Kimi K2.5
+Request-category alignment,Tversky alignment,225-case deterministic,0.360,0.334,0.359,0.399
+Request-category alignment,LCS recall,225-case deterministic,0.465,0.510,0.500,0.561
+Request-category alignment,Pairwise order accuracy,225-case deterministic,0.646,0.690,0.654,0.601
+Coverage decomposition and request behavior,Precision,225-case deterministic,0.626,0.560,0.607,0.623
+Coverage decomposition and request behavior,Recall,225-case deterministic,0.525,0.582,0.573,0.672
+Coverage decomposition and request behavior,F1,225-case deterministic,0.592,0.589,0.603,0.638
+Coverage decomposition and request behavior,Event-level recall,224 defined cases; macro average,0.577,0.665,0.655,0.661
+Coverage decomposition and request behavior,Off-protocol rate,225-case deterministic,0.000,0.003,0.005,0.002
+Coverage decomposition and request behavior,Redundant rate,225-case deterministic,0.099,0.170,0.150,0.202
+Interactive FVCU quality,Factuality,100-case existing LLM judgments,4.81,4.82,4.75,4.85
+Interactive FVCU quality,Validity,100-case existing LLM judgments,4.84,4.84,4.78,4.87
+Interactive FVCU quality,Coherence,100-case existing LLM judgments,4.84,4.87,4.79,4.92
+Interactive FVCU quality,Utility,100-case existing LLM judgments,4.22,4.20,4.11,4.29
+Turn efficiency and availability,Mean turns used,225-case deterministic,9.93,11.31,11.88,10.28
+Turn efficiency and availability,Answer yield,225-case deterministic,0.525,0.611,0.544,0.642
+Turn efficiency and availability,Unavailable-turn rate,225-case deterministic,0.351,0.272,0.348,0.250

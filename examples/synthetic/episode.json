@@ -1,0 +1,37 @@
+{
+  "case_id": "SYNTHETIC001",
+  "known_final_diagnosis": "Synthetic diagnosis",
+  "turns_used": 4,
+  "max_turns": 15,
+  "termination": "final_submitted",
+  "turns": [
+    {
+      "turn_number": 1,
+      "clinician": {"action": "REQUEST_RESULT", "request": "What did the laboratory tests show?"},
+      "report": {"status": "found", "evidence_id": "E002", "verbatim_excerpt": "Synthetic laboratory testing showed anemia."}
+    },
+    {
+      "turn_number": 2,
+      "clinician": {"action": "ORDER_TEST", "request": "What did imaging show?"},
+      "report": {"status": "found", "evidence_id": "E003", "verbatim_excerpt": "Synthetic imaging showed a focal lesion."}
+    },
+    {
+      "turn_number": 3,
+      "clinician": {"action": "ORDER_PROCEDURE", "request": "What did the biopsy pathology show?"},
+      "report": {"status": "found", "evidence_id": "E004", "verbatim_excerpt": "Synthetic biopsy showed the predefined diagnostic pattern."}
+    },
+    {
+      "turn_number": 4,
+      "clinician": {"action": "FINAL_TRAJECTORY", "request": "Submit the reconstruction."},
+      "report": null
+    }
+  ],
+  "disclosed_evidence_ids": ["E002", "E003", "E004"],
+  "final": {
+    "trajectory_summary": "The synthetic trajectory progressed from laboratory testing to imaging and pathology.",
+    "key_supporting_evidence": [
+      {"claim": "Synthetic support", "evidence_ids": ["E002", "E003", "E004"]}
+    ]
+  },
+  "model_usage": {}
+}
