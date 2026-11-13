@@ -4,7 +4,7 @@
 Yufan Wang, Rui Yang, Yi Lin, Chunhua Weng, and Yifan Peng  
 Accepted to *Findings of the Association for Computational Linguistics: EACL 2027*.
 
-This is a pre-publication reproducibility package. It contains the corrected camera-ready evaluation code, aggregate outputs, safe synthetic examples, and documentation. It does **not** contain PMC article text, source quotations, extracted real-case event banks, or saved model conversations. Those materials require article-by-article redistribution review and are intentionally excluded.
+This is a pre-publication reproducibility package. It contains the corrected camera-ready evaluation code, aggregate outputs, safe synthetic examples, and documentation. Benchmark data are distributed separately through the public data repository and are intentionally not duplicated in this code repository.
 
 ## 1. Overview
 
@@ -48,6 +48,48 @@ python -m pytest -q
 
 The example is explicitly synthetic and is not part of the benchmark or reported results.
 
+## Data repository
+
+The benchmark data repository is [Fanncg1229/Diagtrace](https://github.com/Fanncg1229/Diagtrace). Clone it next to this code repository:
+
+```bash
+git clone https://github.com/Fanncg1229/DiagTrace-code.git
+git clone https://github.com/Fanncg1229/Diagtrace.git
+cd DiagTrace-code
+python -m pip install -e '.[test]'
+```
+
+The public data repository currently contains the 510 construction resources and four matched sets of 225 interaction traces. At the audited commit, it does **not** yet contain the canonical Setting 2 event banks, six corrected Claude specialty episodes, full-scale episodes, fixed-checklist episodes, or saved FVCU outputs required for end-to-end camera-ready reproduction. See [docs/DATA_REPOSITORY_AUDIT.md](docs/DATA_REPOSITORY_AUDIT.md).
+
+After the reviewed data addendum is installed as `Diagtrace/camera_ready_release`, deterministic matched and full-scale metrics can be recomputed with:
+
+```bash
+python evaluation/score_manifest.py \
+  --manifest ../Diagtrace/camera_ready_release/manifests/matched225_manifest.jsonl \
+  --artifact-root ../Diagtrace/camera_ready_release \
+  --output-dir /tmp/diagtrace-matched225
+
+python evaluation/score_manifest.py \
+  --manifest ../Diagtrace/camera_ready_release/manifests/full_scale_manifest.jsonl \
+  --artifact-root ../Diagtrace/camera_ready_release \
+  --output-dir /tmp/diagtrace-full-scale
+
+python evaluation/score_checklist_manifest.py \
+  --checklist-manifest ../Diagtrace/camera_ready_release/manifests/fixed_checklist_manifest.jsonl \
+  --model-manifest ../Diagtrace/camera_ready_release/manifests/matched225_manifest.jsonl \
+  --artifact-root ../Diagtrace/camera_ready_release \
+  --output-dir /tmp/diagtrace-checklist
+
+python evaluation/aggregate_fvcu.py \
+  --root ../Diagtrace/camera_ready_release/fvcu \
+  --output /tmp/diagtrace-fvcu.csv
+```
+
+The checklist scorer preserves the seeded PMCID-ordered bootstrap used by the camera-ready audit,
+so the saved Monte Carlo confidence intervals reproduce exactly.
+
+Do not use `data/diagtrace_510.jsonl` as the Setting 2 event bank: its 5,911 `evidence_events` belong to the construction resource, whereas Setting 2 is scored against a separate frozen `evidence_items` bank.
+
 ## 4. Benchmark construction
 
 The original workflow converts source-grounded case material into ordered evidence items and hidden reference fields, then audits finding coverage, event faithfulness, and reasoning support. Relevant code is in `src/diagnostic_narrowing/` and `construction/`. The audit scripts can consume saved resources and, when configured, call an LLM judge. No API call is needed for deterministic trajectory scoring.
@@ -87,7 +129,7 @@ The exact reported aggregate values are preserved in:
 
 To recompute deterministic metrics, create a JSONL manifest following `examples/synthetic/manifest.jsonl`; each row identifies `model`, `specialty`, `case_id`, `case_path`, `episode_path`, and whether the case belongs to the matched subset. Then run `evaluation/score_manifest.py`. The scorer rejects duplicate specialty-case-model identities and inconsistent cross-model event-bank snapshots.
 
-The real manifest, event banks, and episodes are not included because they contain PMC-derived quotations and model traces whose redistribution clearance has not been completed. Therefore this package validates the code and included aggregates but does not claim end-to-end public reproduction of Table 3 from raw data.
+The real manifest, event banks, and episodes are not duplicated in this code repository. At the audited public-data commit, the camera-ready addendum needed for end-to-end raw reproduction was not yet present; see the data-repository audit for the exact missing artifacts.
 
 ## 8. Reproducing Figure 2
 
@@ -101,6 +143,9 @@ python evaluation/plot_category_recall_heatmap.py \
 
 The command creates PNG and PDF versions of the heatmap.
 
+To derive the corrected category-recall source from raw canonical artifacts first, use
+`category_recall_matched.csv`, which is emitted by `evaluation/score_manifest.py` for the matched subset.
+
 ## 9. Fixed-checklist baseline
 
 `baselines/run_real_checklist_baseline.py` runs the untuned, diagnosis-independent checklist through the unchanged report agent under the 15-turn cap. `score_checklist_vs_models.py` computes paired event-recall comparisons and `bootstrap_checklist_ci.py` computes uncertainty intervals. Aggregate corrected results for the canonical 16 specialty-stratified cases are in `results/fixed_checklist/`.
@@ -113,7 +158,7 @@ Regenerating the baseline episodes requires the frozen real event banks and repo
 
 ## 11. Data access and redistribution
 
-PMC availability does not by itself grant redistribution rights. Licenses and reuse terms are article specific. This package therefore contains no real source text, event quotations, PMC XML, article figures, or real interaction traces. See [docs/DATA_ACCESS.md](docs/DATA_ACCESS.md) for the required acquisition and license-ledger process.
+The DiagTrace benchmark data have been approved for public redistribution and are maintained in the separate [data repository](https://github.com/Fanncg1229/Diagtrace). This code repository contains no raw article files and does not duplicate the benchmark payload. See [docs/DATA_ACCESS.md](docs/DATA_ACCESS.md) and [docs/DATA_REPOSITORY_AUDIT.md](docs/DATA_REPOSITORY_AUDIT.md).
 
 ## 12. Citation
 
@@ -131,4 +176,4 @@ The final ACL Anthology identifier and DOI were not available when this package 
 
 ## Release status
 
-No software license is included because the authors have not yet confirmed the applicable code license and permissions. This package is suitable for private review, but it must not be made public until the items in `PUBLIC_RELEASE_CHECKLIST.md` are resolved.
+The code is distributed under the MIT License; see `LICENSE`. Complete the remaining data-addendum and citation checks in `PUBLIC_RELEASE_CHECKLIST.md` before the coordinated public release.

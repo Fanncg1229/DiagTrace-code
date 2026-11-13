@@ -195,6 +195,33 @@ def score(rows: list[dict[str, Any]]) -> tuple[dict[str, float | None], dict[str
     return summary, diagnostics
 
 
+def category_recall(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    gold_counts: dict[str, int] = defaultdict(int)
+    hit_counts: dict[str, int] = defaultdict(int)
+    for row in rows:
+        result = evaluate_case(
+            case_id=row["case_id"],
+            case_data=row["case"],
+            episode=row["episode"],
+            include_initial_stage=False,
+        )
+        gold = [str(value) for value in result.get("gold_sequence") or []]
+        predicted = {str(value) for value in result.get("prediction_sequence") or []}
+        for category in gold:
+            gold_counts[category] += 1
+            if category in predicted:
+                hit_counts[category] += 1
+    return [
+        {
+            "category": category,
+            "gold_cases": gold_counts[category],
+            "hit_cases": hit_counts[category],
+            "category_recall": hit_counts[category] / gold_counts[category],
+        }
+        for category in sorted(gold_counts)
+    ]
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--manifest", type=Path, required=True)
@@ -206,6 +233,7 @@ def main() -> None:
     args.output_dir.mkdir(parents=True, exist_ok=True)
 
     comparison = []
+    category_rows = []
     diagnostics = {}
     for model in sorted({row["model"] for row in records}):
         full = [row for row in records if row["model"] == model]
@@ -215,6 +243,8 @@ def main() -> None:
         matched_scores, matched_diag = score(matched)
         full_scores, full_diag = score(full)
         diagnostics[model] = {"matched": matched_diag, "full": full_diag}
+        for row in category_recall(matched):
+            category_rows.append({"model": model, **row})
         for metric in METRICS:
             comparison.append(
                 {
@@ -235,6 +265,10 @@ def main() -> None:
         writer = csv.DictWriter(handle, fieldnames=list(comparison[0]))
         writer.writeheader()
         writer.writerows(comparison)
+    with (args.output_dir / "category_recall_matched.csv").open("w", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=list(category_rows[0]))
+        writer.writeheader()
+        writer.writerows(category_rows)
     (args.output_dir / "diagnostics.json").write_text(json.dumps(diagnostics, indent=2))
 
 

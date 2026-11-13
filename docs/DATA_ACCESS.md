@@ -2,20 +2,20 @@
 
 ## What is excluded
 
-This repository excludes:
+This code repository excludes:
 
 - PMC XML, article PDFs, figures, captions copied from articles, and source quotations;
 - real extracted event banks and hidden reference resources;
 - real clinician/report-agent conversations and per-case trajectories;
 - credentials, provider responses containing account metadata, and institutional files.
 
-The synthetic example contains invented clinical text and IDs and is clearly labeled. It must not be described as benchmark data.
+The benchmark data have been approved for public redistribution and are hosted separately at <https://github.com/Fanncg1229/Diagtrace>. The synthetic example in this code repository contains invented clinical text and IDs and must not be described as benchmark data.
 
 ## Why public access is not enough
 
 PMC is a repository containing works under different copyright and license terms. Free availability in PMC does not mean that every article can be redistributed in a derived benchmark. Reuse permission must be evaluated per article and per included content type.
 
-Before releasing real resources, create a license ledger containing at least: PMCID, canonical article URL, license identifier, machine-readable license source, retrieval date, allowed redistribution/derivative terms, included content types, and reviewer decision. Cases without explicit compatible permission should remain excluded.
+The release owner has confirmed redistribution approval. Future additions should retain the underlying approval and provenance records, including PMCID, article URL, license/permission basis, retrieval date, included content types, and reviewer decision.
 
 ## Lawful reconstruction workflow
 

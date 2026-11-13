@@ -29,8 +29,7 @@ The first smoke test found two release-interface issues: the synthetic test call
 - **Fixed-checklist episode regeneration:** skipped because it would require real event banks and an external report-agent API.
 - **Reference-resource extraction/audit and FVCU regeneration:** skipped because these require external LLM APIs and would create new, potentially version-dependent outputs.
 - **Full-scale sensitivity recomputation from raw episodes:** skipped because the saved real traces are excluded. Included aggregate outputs and exact analysis provenance code were inspected instead.
-- **Article-by-article legal clearance:** not complete. The working project contains PMC XML/PDFs, extracted resources, and traces, but none was copied. Public release remains blocked until a license ledger and permission review are complete.
-- **Code-license verification:** not complete; consequently no `LICENSE` is included.
+- **Data payload:** intentionally absent from this code package. Redistribution approval was subsequently confirmed and the public data repository was audited separately; the camera-ready addendum was not yet present at the audited public commit.
 
 ## Result reproduction status
 
@@ -42,4 +41,4 @@ The first smoke test found two release-interface issues: the synthetic test call
 ## Release assessment
 
 - **Private GitHub review:** safe, provided the repository remains private and access controlled.
-- **Public release:** not ready. Primary blockers are the missing confirmed code license and incomplete article-level redistribution clearance for any real benchmark resources or traces.
+- **Public code release:** the repository now carries the MIT License. The reviewed camera-ready data addendum still needs to be added to the data repository before claiming end-to-end raw reproduction.

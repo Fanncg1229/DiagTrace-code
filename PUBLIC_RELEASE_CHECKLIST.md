@@ -2,13 +2,13 @@
 
 The package is suitable for private collaborator review. Complete every unchecked item before public release.
 
-- [ ] Confirm the software license with all code contributors and add the approved `LICENSE`.
+- [x] Confirm and add the MIT software license.
 - [ ] Confirm author names, order, paper title, venue wording, and final citation metadata.
 - [ ] Replace the pending citation note only after the ACL Anthology identifier/DOI is official.
-- [ ] Complete an article-level PMC license ledger for every real case proposed for release.
-- [ ] Obtain institutional/legal review for redistributed excerpts, derived event banks, and traces.
+- [x] Confirm benchmark-data approval for public redistribution.
+- [ ] Retain the approval/provenance ledger with the public data release records.
 - [ ] Decide whether model conversations may be distributed under provider terms and remove provider metadata.
-- [ ] If real artifacts are approved, regenerate a public manifest and rerun all deterministic checks from a clean clone.
+- [ ] Add the reviewed camera-ready data addendum without overwriting the original public release, then rerun all deterministic checks from a clean clone.
 - [ ] Verify that every model is scored against the same frozen reference snapshot for each canonical `(specialty, PMCID)` identity.
 - [ ] Resolve/document any remaining mismatch between construction-stage events and Setting 2 evidence items.
 - [ ] Pin final dependency versions or publish a tested lock file/container.

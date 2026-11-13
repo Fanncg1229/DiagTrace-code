@@ -5,7 +5,7 @@
 This release distinguishes three levels rather than overstating what can be reproduced publicly:
 
 1. **Fully offline:** package installation, corrected classifier regression tests, deterministic scoring on the synthetic fixture, Figure 2 rendering from aggregate data, and aggregate-result consistency checks.
-2. **Offline with restricted artifacts:** Table 3 deterministic metrics, fixed-checklist scoring, and full-scale sensitivity can be recomputed if the frozen real event banks and saved episodes are supplied in the documented manifest/layout.
+2. **Offline with the separate data release:** Table 3 deterministic metrics, fixed-checklist scoring, and full-scale sensitivity can be recomputed when the reviewed camera-ready data addendum is installed in the public data repository.
 3. **API dependent:** reference-resource generation/audit, new clinician/report-agent episodes, and new FVCU judgments require provider credentials and may vary with model/version changes.
 
 ## Environment
@@ -63,7 +63,7 @@ FVCU values in the canonical CSV are saved aggregate LLM-judge outputs. `constru
 
 ## Known limitations
 
-- Real case resources and traces are excluded pending license and release review.
+- Real case resources and traces are maintained in the separate data repository; the audited public commit still lacks the camera-ready addendum described in `docs/DATA_REPOSITORY_AUDIT.md`.
 - Model-backed generation cannot be made bitwise deterministic across changing hosted endpoints.
 - The construction-stage 5,911-event corpus and the Setting 2 report-agent event bank use different schemas and denominators; see `docs/EVENT_DEFINITIONS.md`.
 - The included full-scale script records the exact internal artifact workflow. It requires the original saved artifact hierarchy or a local adaptation of its input paths; aggregate outputs are included for inspection.
