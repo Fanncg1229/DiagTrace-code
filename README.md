@@ -4,7 +4,7 @@
 Yufan Wang, Rui Yang, Yi Lin, Chunhua Weng, and Yifan Peng  
 Accepted to *Findings of the Association for Computational Linguistics: EACL 2027*.
 
-This is a pre-publication reproducibility package. It contains the corrected camera-ready evaluation code, aggregate outputs, safe synthetic examples, and documentation. Benchmark data are distributed separately through the public data repository and are intentionally not duplicated in this code repository.
+This is the public reproducibility package for the corrected camera-ready evaluation. It contains evaluation code, aggregate outputs, safe synthetic examples, and documentation. Benchmark data are distributed separately through the public data repository and are intentionally not duplicated in this code repository.
 
 ## 1. Overview
 
@@ -59,9 +59,9 @@ cd DiagTrace-code
 python -m pip install -e '.[test]'
 ```
 
-The public data repository currently contains the 510 construction resources and four matched sets of 225 interaction traces. At the audited commit, it does **not** yet contain the canonical Setting 2 event banks, six corrected Claude specialty episodes, full-scale episodes, fixed-checklist episodes, or saved FVCU outputs required for end-to-end camera-ready reproduction. See [docs/DATA_REPOSITORY_AUDIT.md](docs/DATA_REPOSITORY_AUDIT.md).
+The authoritative corrected camera-ready artifacts are public under `camera_ready_release/` in the data repository. The original submission-era `data/` and `interaction_traces/` paths remain available for provenance, but their saved aggregate/category metrics predate the classifier correction. See [docs/DATA_REPOSITORY_AUDIT.md](docs/DATA_REPOSITORY_AUDIT.md) for the audit that preceded the final addendum.
 
-After the reviewed data addendum is installed as `Diagtrace/camera_ready_release`, deterministic matched and full-scale metrics can be recomputed with:
+With both repositories cloned side by side, deterministic matched and full-scale metrics can be recomputed with:
 
 ```bash
 python evaluation/score_manifest.py \
@@ -129,7 +129,7 @@ The exact reported aggregate values are preserved in:
 
 To recompute deterministic metrics, create a JSONL manifest following `examples/synthetic/manifest.jsonl`; each row identifies `model`, `specialty`, `case_id`, `case_path`, `episode_path`, and whether the case belongs to the matched subset. Then run `evaluation/score_manifest.py`. The scorer rejects duplicate specialty-case-model identities and inconsistent cross-model event-bank snapshots.
 
-The real manifest, event banks, and episodes are not duplicated in this code repository. At the audited public-data commit, the camera-ready addendum needed for end-to-end raw reproduction was not yet present; see the data-repository audit for the exact missing artifacts.
+The real manifest, event banks, and episodes are not duplicated in this code repository. They are public under `camera_ready_release/` in the companion data repository.
 
 ## 8. Reproducing Figure 2
 
@@ -150,11 +150,11 @@ To derive the corrected category-recall source from raw canonical artifacts firs
 
 `baselines/run_real_checklist_baseline.py` runs the untuned, diagnosis-independent checklist through the unchanged report agent under the 15-turn cap. `score_checklist_vs_models.py` computes paired event-recall comparisons and `bootstrap_checklist_ci.py` computes uncertainty intervals. Aggregate corrected results for the canonical 16 specialty-stratified cases are in `results/fixed_checklist/`.
 
-Regenerating the baseline episodes requires the frozen real event banks and report-agent access; those inputs are excluded. The included CSVs are aggregate outputs, not a substitute synthetic rerun.
+Regenerating new baseline episodes requires report-agent access. The frozen event banks, canonical saved baseline episodes, manifest, and expected outputs used for the paper are public under `camera_ready_release/` in the data repository.
 
 ## 10. Full-scale sensitivity analysis
 
-`analysis/internal_full_scale_sensitivity.py` is the exact corrected camera-ready analysis used with saved artifacts. It uses canonical `(specialty, PMCID)` identities, checks event-bank signatures across models, and compares matched-225 with all completed episodes. Aggregate outputs are in `results/full_scale_sensitivity/`. The raw episodes required for rerunning it are excluded pending redistribution review.
+`analysis/internal_full_scale_sensitivity.py` is the exact corrected camera-ready analysis used with saved artifacts. It uses canonical `(specialty, PMCID)` identities, checks event-bank signatures across models, and compares matched-225 with all completed episodes. Aggregate outputs are in `results/full_scale_sensitivity/`; the canonical episodes and portable manifest are public in the companion data repository.
 
 ## 11. Data access and redistribution
 
@@ -176,4 +176,4 @@ The final ACL Anthology identifier and DOI were not available when this package 
 
 ## Release status
 
-The code is distributed under the MIT License; see `LICENSE`. Complete the remaining data-addendum and citation checks in `PUBLIC_RELEASE_CHECKLIST.md` before the coordinated public release.
+The code is distributed under the MIT License; see `LICENSE`. Benchmark data and third-party PMC-derived excerpts are governed separately as documented in the data repository's `LICENSE.md`.
